@@ -1,0 +1,1 @@
+Tarea 1 del curso EL4203 Programación Avanzada, DIE, FCFM, U. de Chile durante el segundo semestre. Esta tarea está diseñada para explorar y construir soluciones basadas en el paradigma de Programación Orientada a Objetos (u *OOP* por sus siglas en inglés), usando el lenguaje de programación Python.
