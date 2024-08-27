@@ -1,0 +1,4 @@
+name: el4203-tarea1
+dependencies:
+  - python>=3.12,<3.13
+  - matplotlib>=3.8.4
