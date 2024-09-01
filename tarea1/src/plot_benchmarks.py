@@ -5,18 +5,18 @@ import os
 
 def save_benchmarks_plot(name: str, *sol_methods: tuple[str]) -> None:
     if len(sol_methods) == 0:
-        raise TypeError("At least one method should be passed, given 0.")
+        raise TypeError("At least one solution should be passed, given 0.")
     
     benchmarks = dict()
     data_path = "../data/"
-    for method in sol_methods:
-        file_path = data_path + f"{method}_benchmark.txt"
-        benchmarks[method] = get_benchmark(file_path)
+    for solution in sol_methods:
+        file_path = data_path + f"{solution}_benchmark.txt"
+        benchmarks[solution] = get_benchmark(file_path)
 
-        keys = benchmarks[method].keys()
-        values = benchmarks[method].values()
+        keys = benchmarks[solution].keys()
+        values = benchmarks[solution].values()
 
-        plt.plot(keys, values, label=method)
+        plt.plot(keys, values, label=solution)
 
     plt.legend()
     plt.grid()

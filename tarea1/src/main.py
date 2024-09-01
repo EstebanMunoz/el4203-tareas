@@ -1,17 +1,19 @@
 from path_count import PathCount
 from plot_benchmarks import save_benchmarks_plot
+from solutions import RecursiveSolution, DinamycSolution, CombinatorialSolution
 
 if __name__ == "__main__":
-    dim = 17
+    max_grid_dim = 17
     path_count = PathCount()
 
-    methods = ["recursive", "dynamic", "combinatorial"]
-    for method in methods:
-        path_count.set_solution_method(method)
-        for k in range(3, dim+1):
-            if k != 3:
-                path_count.solve(k-2, k-1)
-            path_count.solve(k-1, k-1)
+    solutions = [RecursiveSolution(), DinamycSolution(), CombinatorialSolution()]
+    for solution in solutions:
+        path_count.set_solution_method(solution)
+        for k in range(2, max_grid_dim+1):
+            if k != 2:
+                path_count.count(k-1, k)
+            path_count.count(k, k)
 
-    save_benchmarks_plot("benchmarks", *methods)
+    str_sols = [str(solution) for solution in solutions]
+    save_benchmarks_plot("benchmarks", *str_sols)
     
