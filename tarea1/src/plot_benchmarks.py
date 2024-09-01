@@ -21,8 +21,8 @@ def save_benchmarks_plot(name: str, *sol_methods: tuple[str]) -> None:
     plt.legend()
     plt.grid()
 
-    plt.title("Execution time for different Fibonacci methods")
-    plt.xlabel("Fibonacci Number")
+    plt.title("Execution time for different count methods")
+    plt.xlabel("$n + m$")
     plt.ylabel("Execution Time [s]")
 
     figures_path = "../figures"
@@ -39,9 +39,9 @@ def get_benchmark(file_path: str) -> dict[int, float]:
 
     with open(file_path, "r") as f:
         for line in f:
-            num, time = line.split(":")
-            num = int(num)
+            n, m, time = line.split(",")
+            n, m = int(n), int(m)
             time = float(time.strip())
-            benchmark[num] = time
+            benchmark[n+m] = time
 
     return benchmark

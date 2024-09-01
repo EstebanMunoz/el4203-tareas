@@ -10,9 +10,9 @@ def benchmark(func: Callable) -> Callable:
         nonlocal avoid_deletion
 
         # Benchmark the function call
-        self, num = args
+        self, n, m = args
         start_time = perf_counter()
-        result = func(self, num)
+        result = func(self, n, m)
         stop_time = perf_counter()
         total_time = stop_time - start_time
 
@@ -21,13 +21,13 @@ def benchmark(func: Callable) -> Callable:
         if not os.path.isdir(data_path):
             os.makedirs(data_path)
 
-        file_path = f"{data_path}/{self.sol_method}_benchmark.txt"
+        file_path = f"{data_path}/{self.solution_method}_benchmark.txt"
         if os.path.isfile(file_path) and file_path not in avoid_deletion:
             os.remove(file_path)
             avoid_deletion.add(file_path)
             
         with open(file_path, "a") as benchmark:
-            benchmark.write(f"{num}: {total_time}\n")
+            benchmark.write(f"{n}, {m}, {total_time}\n")
 
         return result
     
