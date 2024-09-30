@@ -1,12 +1,12 @@
-from typing import Callable, Any
+from pathlib import Path
 from time import perf_counter
-import os
+from typing import Any, Callable
 
 
 def benchmark(func: Callable) -> Callable:
     avoid_deletion = set()
 
-    def wrapper(*args: tuple[Any]):
+    def wrapper(*args: tuple[Any]) -> Any:
         nonlocal avoid_deletion
 
         # Benchmark the function call
@@ -17,18 +17,18 @@ def benchmark(func: Callable) -> Callable:
         total_time = stop_time - start_time
 
         # Save the benchmark to a file
-        data_path = "../data"
-        if not os.path.isdir(data_path):
-            os.makedirs(data_path)
+        data_path = Path("../data")
+        if not data_path.exists():
+            Path.mkdir(data_path)
 
-        file_path = f"{data_path}/{self.solution_method}_benchmark.txt"
-        if os.path.isfile(file_path) and file_path not in avoid_deletion:
-            os.remove(file_path)
+        file_path = data_path / f"{self.solution_method}_benchmark.txt"
+        if file_path.is_file() and file_path not in avoid_deletion:
+            file_path.unlink()
             avoid_deletion.add(file_path)
-            
-        with open(file_path, "a") as benchmark:
+
+        with Path.open(file_path, "a") as benchmark:
             benchmark.write(f"{n}, {m}, {total_time}\n")
 
         return result
-    
+
     return wrapper
